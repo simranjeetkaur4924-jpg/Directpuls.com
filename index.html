@@ -1,0 +1,1359 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>DirectPulse — The New Layer of Web3</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* =========================================================
+   DIRECTPULSE — PREMIUM WEB3 INTERFACE
+========================================================= */
+
+:root{
+    --black:#020207;
+    --dark:#05050d;
+    --panel:#090912;
+    --panel2:#0d0d19;
+
+    --purple:#8b5cf6;
+    --purple2:#a78bfa;
+    --blue:#3b82f6;
+    --cyan:#38bdf8;
+
+    --white:#ffffff;
+    --text:#e9e9f2;
+    --muted:#858597;
+    --muted2:#5e5e70;
+
+    --line:rgba(255,255,255,.075);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:
+        radial-gradient(
+            circle at 15% 5%,
+            rgba(139,92,246,.13),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 85% 20%,
+            rgba(59,130,246,.12),
+            transparent 30%
+        ),
+        linear-gradient(
+            180deg,
+            #020207 0%,
+            #04040b 45%,
+            #020207 100%
+        );
+
+    color:var(--white);
+    font-family:"Inter",sans-serif;
+    overflow-x:hidden;
+}
+
+/* =========================================================
+   AMBIENT LIGHT
+========================================================= */
+
+.ambient{
+    position:fixed;
+    width:500px;
+    height:500px;
+    border-radius:50%;
+    pointer-events:none;
+    filter:blur(100px);
+    opacity:.15;
+    z-index:-2;
+}
+
+.ambient.one{
+    top:-180px;
+    left:-150px;
+    background:var(--purple);
+    animation:ambientOne 12s ease-in-out infinite alternate;
+}
+
+.ambient.two{
+    top:35%;
+    right:-220px;
+    background:var(--blue);
+    animation:ambientTwo 15s ease-in-out infinite alternate;
+}
+
+.ambient.three{
+    bottom:-250px;
+    left:35%;
+    background:#6d28d9;
+    animation:ambientThree 13s ease-in-out infinite alternate;
+}
+
+@keyframes ambientOne{
+    from{transform:translate(0,0);}
+    to{transform:translate(180px,120px);}
+}
+
+@keyframes ambientTwo{
+    from{transform:translate(0,0);}
+    to{transform:translate(-150px,100px);}
+}
+
+@keyframes ambientThree{
+    from{transform:translate(-100px,0);}
+    to{transform:translate(120px,-100px);}
+}
+
+/* =========================================================
+   GRID
+========================================================= */
+
+.grid-background{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:-3;
+    opacity:.18;
+
+    background-image:
+        linear-gradient(
+            rgba(255,255,255,.035) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.035) 1px,
+            transparent 1px
+        );
+
+    background-size:70px 70px;
+
+    mask-image:linear-gradient(
+        to bottom,
+        black,
+        transparent 75%
+    );
+}
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+.navbar{
+    height:80px;
+    padding:0 6%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    position:sticky;
+    top:0;
+    z-index:1000;
+
+    background:rgba(2,2,7,.65);
+    backdrop-filter:blur(25px);
+
+    border-bottom:1px solid var(--line);
+}
+
+.logo{
+    font-family:"Space Grotesk";
+    font-size:21px;
+    font-weight:700;
+    letter-spacing:-.8px;
+}
+
+.logo span{
+    background:
+        linear-gradient(
+            100deg,
+            var(--purple2),
+            var(--blue),
+            var(--cyan)
+        );
+
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+.nav{
+    display:flex;
+    align-items:center;
+    gap:32px;
+}
+
+.nav a{
+    color:#858597;
+    text-decoration:none;
+    font-size:12px;
+    transition:.3s;
+}
+
+.nav a:hover{
+    color:white;
+}
+
+.wallet-button{
+    border:1px solid rgba(139,92,246,.4);
+    background:
+        linear-gradient(
+            120deg,
+            rgba(139,92,246,.18),
+            rgba(59,130,246,.13)
+        );
+
+    color:white;
+    padding:11px 17px;
+    border-radius:9px;
+
+    font-size:11px;
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.wallet-button:hover{
+    border-color:rgba(167,139,250,.8);
+    box-shadow:
+        0 0 30px rgba(139,92,246,.18);
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+    max-width:1280px;
+    margin:auto;
+    padding:
+        150px 6%
+        120px;
+
+    min-height:800px;
+
+    display:flex;
+    align-items:center;
+}
+
+.hero-inner{
+    max-width:920px;
+}
+
+.eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+
+    padding:8px 13px;
+
+    border:1px solid rgba(139,92,246,.25);
+    border-radius:100px;
+
+    background:rgba(139,92,246,.055);
+
+    color:#aaa2cf;
+
+    font-size:10px;
+    letter-spacing:1.6px;
+    text-transform:uppercase;
+}
+
+.live-dot{
+    width:6px;
+    height:6px;
+
+    border-radius:50%;
+
+    background:var(--purple2);
+
+    box-shadow:
+        0 0 8px var(--purple),
+        0 0 18px var(--purple);
+
+    animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+    0%,100%{
+        opacity:1;
+    }
+
+    50%{
+        opacity:.35;
+    }
+}
+
+.hero h1{
+    margin-top:28px;
+
+    font-family:"Space Grotesk";
+
+    font-size:
+        clamp(
+            55px,
+            8vw,
+            108px
+        );
+
+    line-height:.91;
+
+    letter-spacing:-6px;
+}
+
+.hero-gradient{
+    background:
+        linear-gradient(
+            100deg,
+            #ffffff 0%,
+            #bba8ff 30%,
+            #72a7ff 65%,
+            #ffffff 100%
+        );
+
+    background-size:300%;
+
+    -webkit-background-clip:text;
+    color:transparent;
+
+    animation:gradient 7s linear infinite;
+}
+
+@keyframes gradient{
+    0%{
+        background-position:0%;
+    }
+
+    100%{
+        background-position:300%;
+    }
+}
+
+.hero-description{
+    max-width:690px;
+
+    margin-top:32px;
+
+    color:#89899b;
+
+    font-size:15px;
+    line-height:1.9;
+}
+
+.hero-actions{
+    display:flex;
+    gap:12px;
+
+    margin-top:35px;
+
+    flex-wrap:wrap;
+}
+
+.primary-button,
+.secondary-button{
+
+    padding:14px 21px;
+
+    border-radius:9px;
+
+    text-decoration:none;
+
+    font-size:11px;
+    font-weight:700;
+
+    transition:.3s;
+}
+
+.primary-button{
+    color:white;
+
+    background:
+        linear-gradient(
+            100deg,
+            var(--purple),
+            var(--blue)
+        );
+
+    box-shadow:
+        0 10px 40px rgba(79,70,229,.2);
+}
+
+.secondary-button{
+    color:#d0d0dc;
+
+    border:1px solid var(--line);
+
+    background:rgba(255,255,255,.025);
+}
+
+.primary-button:hover,
+.secondary-button:hover{
+    transform:translateY(-3px);
+}
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.container{
+    max-width:1280px;
+    margin:auto;
+
+    padding:
+        75px 6%;
+}
+
+.section-label{
+    color:#6f6f82;
+
+    font-size:10px;
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+}
+
+.section-title{
+    margin-top:10px;
+
+    font-family:"Space Grotesk";
+
+    font-size:
+        clamp(
+            30px,
+            4vw,
+            48px
+        );
+
+    letter-spacing:-2px;
+}
+
+.section-description{
+    max-width:650px;
+
+    margin-top:12px;
+
+    color:#777789;
+
+    font-size:13px;
+    line-height:1.8;
+}
+
+/* =========================================================
+   DASHBOARD STATS
+========================================================= */
+
+.stats{
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:13px;
+
+    margin-top:30px;
+}
+
+.glass{
+    background:
+        linear-gradient(
+            145deg,
+            rgba(15,15,28,.83),
+            rgba(6,6,13,.78)
+        );
+
+    border:1px solid var(--line);
+
+    backdrop-filter:blur(20px);
+
+    border-radius:16px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    transition:.35s;
+}
+
+.glass:after{
+    content:"";
+
+    position:absolute;
+
+    width:170px;
+    height:170px;
+
+    top:-120px;
+    right:-90px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(139,92,246,.17),
+            transparent 70%
+        );
+}
+
+.glass:hover{
+    transform:translateY(-4px);
+
+    border-color:
+        rgba(139,92,246,.28);
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.28);
+}
+
+.stat{
+    padding:25px;
+}
+
+.stat-label{
+    color:#6f6f82;
+
+    font-size:9px;
+
+    text-transform:uppercase;
+
+    letter-spacing:1.4px;
+}
+
+.stat-number{
+    margin-top:13px;
+
+    font-family:"Space Grotesk";
+
+    font-size:31px;
+    font-weight:700;
+}
+
+.stat-note{
+    margin-top:6px;
+
+    color:#505063;
+
+    font-size:10px;
+}
+
+/* =========================================================
+   WALLET
+========================================================= */
+
+.wallet-grid{
+    display:grid;
+
+    grid-template-columns:
+        1.4fr .9fr;
+
+    gap:13px;
+
+    margin-top:13px;
+}
+
+.wallet-card{
+    padding:28px;
+
+    min-height:250px;
+}
+
+.wallet-status{
+    display:flex;
+    align-items:center;
+
+    gap:8px;
+
+    margin-top:18px;
+
+    color:#777789;
+
+    font-size:11px;
+}
+
+.status-light{
+    width:7px;
+    height:7px;
+
+    border-radius:50%;
+
+    background:#6d28d9;
+
+    box-shadow:
+        0 0 12px #8b5cf6;
+}
+
+.address{
+    margin-top:20px;
+
+    padding:14px;
+
+    border-radius:9px;
+
+    background:#04040a;
+
+    border:1px solid var(--line);
+
+    color:#777789;
+
+    font-family:monospace;
+
+    font-size:11px;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+}
+
+/* =========================================================
+   PLANS
+========================================================= */
+
+.plans{
+    margin-top:70px;
+}
+
+.plan-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:13px;
+
+    margin-top:30px;
+}
+
+.plan{
+    padding:27px;
+}
+
+.plan-top{
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+}
+
+.plan-number{
+    color:#656578;
+
+    font-size:9px;
+
+    letter-spacing:1.5px;
+}
+
+.plan-tag{
+    color:#9f8ce8;
+
+    font-size:9px;
+
+    letter-spacing:1px;
+
+    text-transform:uppercase;
+}
+
+.plan-name{
+    margin-top:15px;
+
+    font-family:"Space Grotesk";
+
+    font-size:21px;
+}
+
+.plan-price{
+    margin-top:13px;
+
+    font-family:"Space Grotesk";
+
+    font-size:34px;
+
+    font-weight:700;
+}
+
+.plan-price span{
+    color:#707083;
+
+    font-family:Inter;
+
+    font-size:11px;
+
+    font-weight:500;
+}
+
+.plan-description{
+    margin-top:13px;
+
+    min-height:42px;
+
+    color:#707083;
+
+    font-size:11px;
+
+    line-height:1.7;
+}
+
+.buy-button{
+    width:100%;
+
+    margin-top:22px;
+
+    padding:13px;
+
+    border:1px solid rgba(139,92,246,.3);
+
+    border-radius:9px;
+
+    background:
+        linear-gradient(
+            100deg,
+            rgba(139,92,246,.9),
+            rgba(37,99,235,.9)
+        );
+
+    color:white;
+
+    font-size:10px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.buy-button:hover{
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 10px 35px rgba(79,70,229,.25);
+}
+
+/* =========================================================
+   NETWORK
+========================================================= */
+
+.network{
+    margin-top:70px;
+}
+
+.network-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:13px;
+
+    margin-top:30px;
+}
+
+.network-card{
+    padding:27px;
+}
+
+.network-number{
+    margin-top:13px;
+
+    font-family:"Space Grotesk";
+
+    font-size:35px;
+}
+
+/* =========================================================
+   ACTIVITY
+========================================================= */
+
+.activity{
+    margin-top:70px;
+}
+
+.activity-box{
+    margin-top:30px;
+
+    padding:26px;
+}
+
+.activity-row{
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:17px 0;
+
+    border-bottom:1px solid var(--line);
+}
+
+.activity-row:last-child{
+    border-bottom:none;
+}
+
+.activity-left{
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+}
+
+.activity-icon{
+    width:35px;
+    height:35px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:9px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(139,92,246,.17),
+            rgba(37,99,235,.13)
+        );
+
+    border:1px solid rgba(139,92,246,.15);
+
+    color:#a994f4;
+
+    font-size:13px;
+}
+
+.activity-title{
+    font-size:11px;
+}
+
+.activity-sub{
+    margin-top:4px;
+
+    color:#5d5d70;
+
+    font-size:9px;
+}
+
+.activity-time{
+    color:#555568;
+
+    font-size:9px;
+}
+
+/* =========================================================
+   ABOUT
+========================================================= */
+
+.about{
+    margin-top:80px;
+
+    max-width:1050px;
+}
+
+.about-intro{
+    margin-top:22px;
+
+    color:#a1a1b0;
+
+    font-size:16px;
+
+    line-height:1.95;
+}
+
+.about-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:13px;
+
+    margin-top:35px;
+}
+
+.about-card{
+    padding:27px;
+}
+
+.about-card h3{
+    font-family:"Space Grotesk";
+
+    font-size:18px;
+}
+
+.about-card p{
+    margin-top:11px;
+
+    color:#707083;
+
+    font-size:11px;
+
+    line-height:1.9;
+}
+
+/* =========================================================
+   FEATURES
+========================================================= */
+
+.features{
+    margin-top:80px;
+}
+
+.feature-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:13px;
+
+    margin-top:30px;
+}
+
+.feature{
+    padding:27px;
+}
+
+.feature-icon{
+    width:39px;
+    height:39px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(139,92,246,.18),
+            rgba(37,99,235,.13)
+        );
+
+    color:#a994f4;
+
+    border:1px solid rgba(139,92,246,.16);
+}
+
+.feature h3{
+    margin-top:17px;
+
+    font-family:"Space Grotesk";
+
+    font-size:17px;
+}
+
+.feature p{
+    margin-top:9px;
+
+    color:#6c6c7e;
+
+    font-size:11px;
+
+    line-height:1.8;
+}
+
+/* =========================================================
+   REFERRAL
+========================================================= */
+
+.referral{
+    margin-top:100px;
+
+    padding:50px;
+
+    text-align:center;
+
+    border-radius:22px;
+
+    border:1px solid rgba(139,92,246,.18);
+
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(139,92,246,.13),
+            transparent 55%
+        ),
+        linear-gradient(
+            145deg,
+            rgba(13,13,25,.95),
+            rgba(5,5,11,.95)
+        );
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+.referral:before{
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+    top:-150px;
+
+    transform:translateX(-50%);
+
+    width:500px;
+    height:300px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(59,130,246,.15),
+            transparent 65%
+        );
+
+    filter:blur(20px);
+}
+
+.referral-content{
+    position:relative;
+    z-index:2;
+}
+
+.referral h2{
+    font-family:"Space Grotesk";
+
+    font-size:
+        clamp(
+            30px,
+            5vw,
+            52px
+        );
+
+    letter-spacing:-2px;
+}
+
+.referral p{
+    margin:13px auto 0;
+
+    max-width:540px;
+
+    color:#777789;
+
+    font-size:12px;
+
+    line-height:1.8;
+}
+
+.referral-box{
+    max-width:680px;
+
+    margin:27px auto 0;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:9px;
+
+    padding:8px;
+
+    border:1px solid var(--line);
+
+    border-radius:11px;
+
+    background:#04040a;
+}
+
+.referral-link{
+    flex:1;
+
+    padding:9px;
+
+    color:#888899;
+
+    font-family:monospace;
+
+    font-size:10px;
+
+    text-align:left;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+}
+
+.copy-button{
+    border:none;
+
+    padding:11px 16px;
+
+    border-radius:8px;
+
+    color:white;
+
+    background:
+        linear-gradient(
+            100deg,
+            var(--purple),
+            var(--blue)
+        );
+
+    font-size:9px;
+
+    font-weight:700;
+
+    cursor:pointer;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer{
+    margin-top:100px;
+
+    padding:
+        45px 6%;
+
+    border-top:1px solid var(--line);
+
+    text-align:center;
+
+    color:#505063;
+
+    font-size:9px;
+}
+
+.footer-logo{
+    margin-bottom:9px;
+
+    color:white;
+
+    font-family:"Space Grotesk";
+
+    font-size:18px;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:900px){
+
+    .nav{
+        display:none;
+    }
+
+    .hero{
+        padding-top:100px;
+        min-height:auto;
+    }
+
+    .stats{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .wallet-grid{
+        grid-template-columns:1fr;
+    }
+
+    .plan-grid{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .feature-grid{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:560px){
+
+    .navbar{
+        padding:0 5%;
+        height:70px;
+    }
+
+    .logo{
+        font-size:18px;
+    }
+
+    .wallet-button{
+        padding:10px 12px;
+        font-size:9px;
+    }
+
+    .hero{
+        padding:
+            80px 5%
+            65px;
+    }
+
+    .hero h1{
+        font-size:56px;
+        letter-spacing:-3px;
+    }
+
+    .hero-description{
+        font-size:13px;
+    }
+
+    .container{
+        padding:
+            60px 5%;
+    }
+
+    .stats{
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+    .stat{
+        padding:19px;
+    }
+
+    .stat-number{
+        font-size:24px;
+    }
+
+    .plan-grid{
+        grid-template-columns:1fr;
+    }
+
+    .network-grid{
+        grid-template-columns:1fr;
+    }
+
+    .feature-grid{
+        grid-template-columns:1fr;
+    }
+
+    .about-grid{
+        grid-template-columns:1fr;
+    }
+
+    .referral{
+        padding:35px 18px;
+    }
+
+    .referral-box{
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .referral-link{
+        text-align:center;
+    }
+
+    .copy-button{
+        width:100%;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="ambient one"></div>
+<div class="ambient two"></div>
+<div class="ambient three"></div>
+
+<div class="grid-background"></div>
+
+
+<!-- =====================================================
+     NAVIGATION
+===================================================== -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        DIRECT<span>PULSE</span>
+    </div>
+
+    <div class="nav">
+
+        <a href="#dashboard">Dashboard</a>
+
+        <a href="#plans">Plans</a>
+
+        <a href="#network">Network</a>
+
+        <a href="#about">About</a>
+
+    </div>
+
+    <button
+        class="wallet-button"
+        onclick="connectWallet()"
+        id="connectButton">
+
+        CONNECT WALLET
+
+    </button>
+
+</nav>
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero">
+
+    <div class="hero-inner">
+
+        <div class="eyebrow">
+
+            <span class="live-dot"></span>
+
+            Web3 Infrastructure
+
+        </div>
+
+
+        <h1>
+
+            The new layer
+            <br>
+
+            <span class="hero-gradient">
+                of Web3.
+            </span>
+
+        </h1>
+
+
+        <p class="hero-description">
+
+            DirectPulse is a modern Web3-focused digital platform
+            designed to bring wallet connectivity, account
+            information, platform plans, network intelligence
+            and blockchain activity into one refined digital
+            experience.
+
+        </p>
+
+
+    
