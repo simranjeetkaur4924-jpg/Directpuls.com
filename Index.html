@@ -1,1359 +1,698 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>DirectPulse — The New Layer of Web3</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#05050b">
+<title>DirectPulse — Web3 Decentralized Protocol</title>
 
 <style>
-
-/* =========================================================
-   DIRECTPULSE — PREMIUM WEB3 INTERFACE
-========================================================= */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
 
 :root{
-    --black:#020207;
-    --dark:#05050d;
-    --panel:#090912;
-    --panel2:#0d0d19;
+  --bg:#05050b;
+  --panel:#0d0d18;
+  --panel2:#121222;
+  --line:rgba(255,255,255,.09);
+  --text:#f8f8ff;
+  --muted:#9092a6;
+  --cyan:#00f0ff;
+  --purple:#8b5cf6;
+  --violet:#b56cff;
+  --accent:#22d3ee;
+}
 
-    --purple:#8b5cf6;
-    --purple2:#a78bfa;
-    --blue:#3b82f6;
-    --cyan:#38bdf8;
-
-    --white:#ffffff;
-    --text:#e9e9f2;
-    --muted:#858597;
-    --muted2:#5e5e70;
-
-    --line:rgba(255,255,255,.075);
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 120px;
 }
 
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-html{
-    scroll-behavior:smooth;
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
 
 body{
-    background:
-        radial-gradient(
-            circle at 15% 5%,
-            rgba(139,92,246,.13),
-            transparent 28%
-        ),
-        radial-gradient(
-            circle at 85% 20%,
-            rgba(59,130,246,.12),
-            transparent 30%
-        ),
-        linear-gradient(
-            180deg,
-            #020207 0%,
-            #04040b 45%,
-            #020207 100%
-        );
-
-    color:var(--white);
-    font-family:"Inter",sans-serif;
-    overflow-x:hidden;
+  font-family:Inter,Arial,sans-serif;
+  color:var(--text);
+  background:var(--bg);
+  overflow-x:hidden;
+  position: relative;
 }
 
-/* =========================================================
-   AMBIENT LIGHT
-========================================================= */
-
-.ambient{
-    position:fixed;
-    width:500px;
-    height:500px;
-    border-radius:50%;
-    pointer-events:none;
-    filter:blur(100px);
-    opacity:.15;
-    z-index:-2;
+body::before {
+  content: "";
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: 
+    radial-gradient(circle at 50% 20%, rgba(139, 92, 246, 0.12) 0%, transparent 40%),
+    radial-gradient(circle at 80% 60%, rgba(0, 240, 255, 0.08) 0%, transparent 40%);
+  z-index: -1;
+  animation: pulseBg 12s ease-in-out infinite alternate;
+  pointer-events: none;
 }
 
-.ambient.one{
-    top:-180px;
-    left:-150px;
-    background:var(--purple);
-    animation:ambientOne 12s ease-in-out infinite alternate;
+@keyframes pulseBg {
+  0% { transform: scale(1) translate(0, 0); }
+  100% { transform: scale(1.05) translate(-2%, -2%); }
 }
 
-.ambient.two{
-    top:35%;
-    right:-220px;
-    background:var(--blue);
-    animation:ambientTwo 15s ease-in-out infinite alternate;
-}
+a{text-decoration:none;color:inherit}
+button,input{font:inherit}
+button{cursor:pointer}
 
-.ambient.three{
-    bottom:-250px;
-    left:35%;
-    background:#6d28d9;
-    animation:ambientThree 13s ease-in-out infinite alternate;
-}
-
-@keyframes ambientOne{
-    from{transform:translate(0,0);}
-    to{transform:translate(180px,120px);}
-}
-
-@keyframes ambientTwo{
-    from{transform:translate(0,0);}
-    to{transform:translate(-150px,100px);}
-}
-
-@keyframes ambientThree{
-    from{transform:translate(-100px,0);}
-    to{transform:translate(120px,-100px);}
-}
-
-/* =========================================================
-   GRID
-========================================================= */
-
-.grid-background{
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    z-index:-3;
-    opacity:.18;
-
-    background-image:
-        linear-gradient(
-            rgba(255,255,255,.035) 1px,
-            transparent 1px
-        ),
-        linear-gradient(
-            90deg,
-            rgba(255,255,255,.035) 1px,
-            transparent 1px
-        );
-
-    background-size:70px 70px;
-
-    mask-image:linear-gradient(
-        to bottom,
-        black,
-        transparent 75%
-    );
-}
-
-/* =========================================================
-   NAVBAR
-========================================================= */
-
-.navbar{
-    height:80px;
-    padding:0 6%;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-
-    position:sticky;
-    top:0;
-    z-index:1000;
-
-    background:rgba(2,2,7,.65);
-    backdrop-filter:blur(25px);
-
-    border-bottom:1px solid var(--line);
-}
-
-.logo{
-    font-family:"Space Grotesk";
-    font-size:21px;
-    font-weight:700;
-    letter-spacing:-.8px;
-}
-
-.logo span{
-    background:
-        linear-gradient(
-            100deg,
-            var(--purple2),
-            var(--blue),
-            var(--cyan)
-        );
-
-    -webkit-background-clip:text;
-    color:transparent;
-}
+.container{width:min(1180px,92%);margin:auto}
 
 .nav{
-    display:flex;
-    align-items:center;
-    gap:32px;
+  position:fixed;
+  z-index:100;
+  top:12px;
+  left:50%;
+  transform:translateX(-50%);
+  width:min(1160px,94%);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:10px 16px;
+  border:1px solid var(--line);
+  border-radius:18px;
+  background:rgba(5,5,11,.92);
+  backdrop-filter:blur(15px);
+}
+.logo{
+  font:700 20px "Space Grotesk",sans-serif;
+  letter-spacing:-1px;
+  white-space:nowrap;
+}
+.logo i{
+  display:inline-block;
+  width:8px;height:8px;
+  border-radius:50%;
+  background:var(--cyan);
+  box-shadow:0 0 10px var(--cyan);
+  margin:0 3px 2px 2px;
+}
+.logo span{
+  background:linear-gradient(90deg,var(--violet),var(--cyan));
+  -webkit-background-clip:text;
+  color:transparent;
+}
+.nav-right{display:flex;align-items:center;gap:8px}
+.navlinks{display:flex;gap:20px;color:#b7b8c8;font-size:12px;font-weight:500}
+.navlinks a:hover{color:#fff}
+
+.dashboard-btn-icon{
+  background:rgba(139,92,246,.12);
+  border:1px solid rgba(181,108,255,.3);
+  color:var(--cyan);
+  padding:7px 12px;
+  border-radius:10px;
+  font-weight:600;
+  font-size:12px;
+  display:flex;
+  align-items:center;
+  gap:5px;
+  white-space:nowrap;
 }
 
-.nav a{
-    color:#858597;
-    text-decoration:none;
-    font-size:12px;
-    transition:.3s;
+.btn{
+  border:1px solid var(--line);
+  color:#fff;
+  background:rgba(255,255,255,.04);
+  border-radius:10px;
+  padding:10px 14px;
+  font-weight:700;
+  font-size:12px;
+  transition: opacity 0.2s ease, transform 0.1s;
+  white-space:nowrap;
 }
-
-.nav a:hover{
-    color:white;
+.btn:active{opacity: 0.8; transform: scale(0.98);}
+.btn.primary{
+  border:0;
+  background:linear-gradient(135deg,#7c3aed,#24d9ff);
+  box-shadow:0 0 20px rgba(139,92,246,.25);
 }
-
-.wallet-button{
-    border:1px solid rgba(139,92,246,.4);
-    background:
-        linear-gradient(
-            120deg,
-            rgba(139,92,246,.18),
-            rgba(59,130,246,.13)
-        );
-
-    color:white;
-    padding:11px 17px;
-    border-radius:9px;
-
-    font-size:11px;
-    font-weight:700;
-
-    cursor:pointer;
-
-    transition:.3s;
-}
-
-.wallet-button:hover{
-    border-color:rgba(167,139,250,.8);
-    box-shadow:
-        0 0 30px rgba(139,92,246,.18);
-}
-
-/* =========================================================
-   HERO
-========================================================= */
 
 .hero{
-    max-width:1280px;
-    margin:auto;
-    padding:
-        150px 6%
-        120px;
-
-    min-height:800px;
-
-    display:flex;
-    align-items:center;
-}
-
-.hero-inner{
-    max-width:920px;
-}
-
-.eyebrow{
-    display:inline-flex;
-    align-items:center;
-    gap:9px;
-
-    padding:8px 13px;
-
-    border:1px solid rgba(139,92,246,.25);
-    border-radius:100px;
-
-    background:rgba(139,92,246,.055);
-
-    color:#aaa2cf;
-
-    font-size:10px;
-    letter-spacing:1.6px;
-    text-transform:uppercase;
-}
-
-.live-dot{
-    width:6px;
-    height:6px;
-
-    border-radius:50%;
-
-    background:var(--purple2);
-
-    box-shadow:
-        0 0 8px var(--purple),
-        0 0 18px var(--purple);
-
-    animation:pulse 2s infinite;
-}
-
-@keyframes pulse{
-    0%,100%{
-        opacity:1;
-    }
-
-    50%{
-        opacity:.35;
-    }
-}
-
-.hero h1{
-    margin-top:28px;
-
-    font-family:"Space Grotesk";
-
-    font-size:
-        clamp(
-            55px,
-            8vw,
-            108px
-        );
-
-    line-height:.91;
-
-    letter-spacing:-6px;
-}
-
-.hero-gradient{
-    background:
-        linear-gradient(
-            100deg,
-            #ffffff 0%,
-            #bba8ff 30%,
-            #72a7ff 65%,
-            #ffffff 100%
-        );
-
-    background-size:300%;
-
-    -webkit-background-clip:text;
-    color:transparent;
-
-    animation:gradient 7s linear infinite;
-}
-
-@keyframes gradient{
-    0%{
-        background-position:0%;
-    }
-
-    100%{
-        background-position:300%;
-    }
-}
-
-.hero-description{
-    max-width:690px;
-
-    margin-top:32px;
-
-    color:#89899b;
-
-    font-size:15px;
-    line-height:1.9;
-}
-
-.hero-actions{
-    display:flex;
-    gap:12px;
-
-    margin-top:35px;
-
-    flex-wrap:wrap;
-}
-
-.primary-button,
-.secondary-button{
-
-    padding:14px 21px;
-
-    border-radius:9px;
-
-    text-decoration:none;
-
-    font-size:11px;
-    font-weight:700;
-
-    transition:.3s;
-}
-
-.primary-button{
-    color:white;
-
-    background:
-        linear-gradient(
-            100deg,
-            var(--purple),
-            var(--blue)
-        );
-
-    box-shadow:
-        0 10px 40px rgba(79,70,229,.2);
-}
-
-.secondary-button{
-    color:#d0d0dc;
-
-    border:1px solid var(--line);
-
-    background:rgba(255,255,255,.025);
-}
-
-.primary-button:hover,
-.secondary-button:hover{
-    transform:translateY(-3px);
-}
-
-/* =========================================================
-   CONTAINER
-========================================================= */
-
-.container{
-    max-width:1280px;
-    margin:auto;
-
-    padding:
-        75px 6%;
-}
-
-.section-label{
-    color:#6f6f82;
-
-    font-size:10px;
-    letter-spacing:2px;
-
-    text-transform:uppercase;
-}
-
-.section-title{
-    margin-top:10px;
-
-    font-family:"Space Grotesk";
-
-    font-size:
-        clamp(
-            30px,
-            4vw,
-            48px
-        );
-
-    letter-spacing:-2px;
-}
-
-.section-description{
-    max-width:650px;
-
-    margin-top:12px;
-
-    color:#777789;
-
-    font-size:13px;
-    line-height:1.8;
-}
-
-/* =========================================================
-   DASHBOARD STATS
-========================================================= */
-
-.stats{
-    display:grid;
-
-    grid-template-columns:
-        repeat(4,1fr);
-
-    gap:13px;
-
-    margin-top:30px;
-}
-
-.glass{
-    background:
-        linear-gradient(
-            145deg,
-            rgba(15,15,28,.83),
-            rgba(6,6,13,.78)
-        );
-
-    border:1px solid var(--line);
-
-    backdrop-filter:blur(20px);
-
-    border-radius:16px;
-
-    position:relative;
-
-    overflow:hidden;
-
-    transition:.35s;
-}
-
-.glass:after{
-    content:"";
-
-    position:absolute;
-
-    width:170px;
-    height:170px;
-
-    top:-120px;
-    right:-90px;
-
-    border-radius:50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(139,92,246,.17),
-            transparent 70%
-        );
-}
-
-.glass:hover{
-    transform:translateY(-4px);
-
-    border-color:
-        rgba(139,92,246,.28);
-
-    box-shadow:
-        0 20px 60px rgba(0,0,0,.28);
-}
-
-.stat{
-    padding:25px;
-}
-
-.stat-label{
-    color:#6f6f82;
-
-    font-size:9px;
-
-    text-transform:uppercase;
-
-    letter-spacing:1.4px;
-}
-
-.stat-number{
-    margin-top:13px;
-
-    font-family:"Space Grotesk";
-
-    font-size:31px;
-    font-weight:700;
-}
-
-.stat-note{
-    margin-top:6px;
-
-    color:#505063;
-
-    font-size:10px;
-}
-
-/* =========================================================
-   WALLET
-========================================================= */
-
-.wallet-grid{
-    display:grid;
-
-    grid-template-columns:
-        1.4fr .9fr;
-
-    gap:13px;
-
-    margin-top:13px;
-}
-
-.wallet-card{
-    padding:28px;
-
-    min-height:250px;
-}
-
-.wallet-status{
-    display:flex;
-    align-items:center;
-
-    gap:8px;
-
-    margin-top:18px;
-
-    color:#777789;
-
-    font-size:11px;
-}
-
-.status-light{
-    width:7px;
-    height:7px;
-
-    border-radius:50%;
-
-    background:#6d28d9;
-
-    box-shadow:
-        0 0 12px #8b5cf6;
-}
-
-.address{
-    margin-top:20px;
-
-    padding:14px;
-
-    border-radius:9px;
-
-    background:#04040a;
-
-    border:1px solid var(--line);
-
-    color:#777789;
-
-    font-family:monospace;
-
-    font-size:11px;
-
-    overflow:hidden;
-
-    text-overflow:ellipsis;
-}
-
-/* =========================================================
-   PLANS
-========================================================= */
-
-.plans{
-    margin-top:70px;
-}
-
-.plan-grid{
-    display:grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap:13px;
-
-    margin-top:30px;
-}
-
-.plan{
-    padding:27px;
-}
-
-.plan-top{
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-}
-
-.plan-number{
-    color:#656578;
-
-    font-size:9px;
-
-    letter-spacing:1.5px;
-}
-
-.plan-tag{
-    color:#9f8ce8;
-
-    font-size:9px;
-
-    letter-spacing:1px;
-
-    text-transform:uppercase;
-}
-
-.plan-name{
-    margin-top:15px;
-
-    font-family:"Space Grotesk";
-
-    font-size:21px;
-}
-
-.plan-price{
-    margin-top:13px;
-
-    font-family:"Space Grotesk";
-
-    font-size:34px;
-
-    font-weight:700;
-}
-
-.plan-price span{
-    color:#707083;
-
-    font-family:Inter;
-
-    font-size:11px;
-
-    font-weight:500;
-}
-
-.plan-description{
-    margin-top:13px;
-
-    min-height:42px;
-
-    color:#707083;
-
-    font-size:11px;
-
-    line-height:1.7;
-}
-
-.buy-button{
-    width:100%;
-
-    margin-top:22px;
-
-    padding:13px;
-
-    border:1px solid rgba(139,92,246,.3);
-
-    border-radius:9px;
-
-    background:
-        linear-gradient(
-            100deg,
-            rgba(139,92,246,.9),
-            rgba(37,99,235,.9)
-        );
-
-    color:white;
-
-    font-size:10px;
-
-    font-weight:700;
-
-    cursor:pointer;
-
-    transition:.3s;
-}
-
-.buy-button:hover{
-    transform:translateY(-2px);
-
-    box-shadow:
-        0 10px 35px rgba(79,70,229,.25);
-}
-
-/* =========================================================
-   NETWORK
-========================================================= */
-
-.network{
-    margin-top:70px;
-}
-
-.network-grid{
-    display:grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap:13px;
-
-    margin-top:30px;
-}
-
-.network-card{
-    padding:27px;
-}
-
-.network-number{
-    margin-top:13px;
-
-    font-family:"Space Grotesk";
-
-    font-size:35px;
-}
-
-/* =========================================================
-   ACTIVITY
-========================================================= */
-
-.activity{
-    margin-top:70px;
-}
-
-.activity-box{
-    margin-top:30px;
-
-    padding:26px;
-}
-
-.activity-row{
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    padding:17px 0;
-
-    border-bottom:1px solid var(--line);
-}
-
-.activity-row:last-child{
-    border-bottom:none;
-}
-
-.activity-left{
-    display:flex;
-
-    align-items:center;
-
-    gap:12px;
-}
-
-.activity-icon{
-    width:35px;
-    height:35px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    border-radius:9px;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(139,92,246,.17),
-            rgba(37,99,235,.13)
-        );
-
-    border:1px solid rgba(139,92,246,.15);
-
-    color:#a994f4;
-
-    font-size:13px;
-}
-
-.activity-title{
-    font-size:11px;
-}
-
-.activity-sub{
-    margin-top:4px;
-
-    color:#5d5d70;
-
-    font-size:9px;
-}
-
-.activity-time{
-    color:#555568;
-
-    font-size:9px;
-}
-
-/* =========================================================
-   ABOUT
-========================================================= */
-
-.about{
-    margin-top:80px;
-
-    max-width:1050px;
-}
-
-.about-intro{
-    margin-top:22px;
-
-    color:#a1a1b0;
-
-    font-size:16px;
-
-    line-height:1.95;
-}
-
-.about-grid{
-    display:grid;
-
-    grid-template-columns:
-        repeat(2,1fr);
-
-    gap:13px;
-
-    margin-top:35px;
-}
-
-.about-card{
-    padding:27px;
-}
-
-.about-card h3{
-    font-family:"Space Grotesk";
-
-    font-size:18px;
-}
-
-.about-card p{
-    margin-top:11px;
-
-    color:#707083;
-
-    font-size:11px;
-
-    line-height:1.9;
-}
-
-/* =========================================================
-   FEATURES
-========================================================= */
-
-.features{
-    margin-top:80px;
-}
-
-.feature-grid{
-    display:grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap:13px;
-
-    margin-top:30px;
-}
-
-.feature{
-    padding:27px;
-}
-
-.feature-icon{
-    width:39px;
-    height:39px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    border-radius:10px;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(139,92,246,.18),
-            rgba(37,99,235,.13)
-        );
-
-    color:#a994f4;
-
-    border:1px solid rgba(139,92,246,.16);
-}
-
-.feature h3{
-    margin-top:17px;
-
-    font-family:"Space Grotesk";
-
-    font-size:17px;
-}
-
-.feature p{
-    margin-top:9px;
-
-    color:#6c6c7e;
-
-    font-size:11px;
-
-    line-height:1.8;
-}
-
-/* =========================================================
-   REFERRAL
-========================================================= */
-
-.referral{
-    margin-top:100px;
-
-    padding:50px;
-
-    text-align:center;
-
-    border-radius:22px;
-
-    border:1px solid rgba(139,92,246,.18);
-
-    background:
-        radial-gradient(
-            circle at 50% 0%,
-            rgba(139,92,246,.13),
-            transparent 55%
-        ),
-        linear-gradient(
-            145deg,
-            rgba(13,13,25,.95),
-            rgba(5,5,11,.95)
-        );
-
-    position:relative;
-
-    overflow:hidden;
-}
-
-.referral:before{
-    content:"";
-
-    position:absolute;
-
-    left:50%;
-    top:-150px;
-
-    transform:translateX(-50%);
-
-    width:500px;
-    height:300px;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(59,130,246,.15),
-            transparent 65%
-        );
-
-    filter:blur(20px);
-}
-
-.referral-content{
-    position:relative;
-    z-index:2;
-}
-
-.referral h2{
-    font-family:"Space Grotesk";
-
-    font-size:
-        clamp(
-            30px,
-            5vw,
-            52px
-        );
-
-    letter-spacing:-2px;
-}
-
-.referral p{
-    margin:13px auto 0;
-
-    max-width:540px;
-
-    color:#777789;
-
-    font-size:12px;
-
-    line-height:1.8;
-}
+  padding:130px 0 50px;
+  text-align:center;
+}
+.pill{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:7px 12px;
+  border-radius:50px;
+  border:1px solid rgba(181,108,255,.25);
+  background:rgba(139,92,246,.08);
+  color:#d8c5ff;
+  font-size:11px;
+  font-weight:600;
+  margin-bottom:18px;
+}
+.pill b{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--cyan);
+  box-shadow:0 0 10px var(--cyan);
+}
+h1{
+  font:700 clamp(32px,5vw,60px)/1.05 "Space Grotesk",sans-serif;
+  letter-spacing:-2px;
+}
+.gradient{
+  background:linear-gradient(90deg,#fff 5%,#bd83ff 45%,#44eaff 90%);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+.hero p{
+  color:var(--muted);
+  max-width:640px;
+  font-size:15px;
+  line-height:1.6;
+  margin:16px auto 24px;
+}
+.actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+
+section{padding:50px 0;position:relative}
+.section-head{text-align:center;max-width:760px;margin:0 auto 35px}
+.section-head h2{
+  font:700 clamp(26px,4vw,42px)/1 "Space Grotesk";
+  letter-spacing:-1.5px;
+}
+.section-head p{color:var(--muted);line-height:1.6;margin-top:10px;font-size:14px}
+
+.roadmap-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+  gap:18px;
+  margin-top:25px;
+}
+.roadmap-card{
+  background:var(--panel);
+  border:1px solid var(--line);
+  padding:24px;
+  border-radius:18px;
+}
+.roadmap-card h3{
+  font:600 18px "Space Grotesk";
+  color:var(--cyan);
+  margin-bottom:10px;
+}
+.roadmap-card p{
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.6;
+}
+
+.packages{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+  gap:18px;
+}
+.package{
+  position:relative;
+  padding:24px;
+  border:1px solid var(--line);
+  border-radius:20px;
+  background:rgba(255,255,255,.02);
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+.package.featured{
+  border-color:rgba(181,108,255,.5);
+  background:rgba(139,92,246,.03);
+}
+
+.pkg-badges{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-bottom:16px;
+}
+.pkg-badge{
+  padding:5px 12px;
+  border-radius:18px;
+  font-size:11px;
+  font-weight:600;
+  background:rgba(255, 255, 255, 0.05);
+  border:1px solid rgba(255, 255, 255, 0.12);
+  color:#d4d5e2;
+}
+
+.package h3{font:600 22px "Space Grotesk"; margin-bottom:4px;}
+.package .price{
+  font:700 32px "Space Grotesk";
+  margin:6px 0 4px;
+  color:var(--cyan);
+}
+.package small{color:var(--muted); font-size:12px;}
+.package ul{list-style:none;margin:18px 0 22px;color:#b4b5c4}
+.package li{padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:13px}
+.package li:before{content:"✓";color:var(--cyan);margin-right:8px}
+.package .btn{width:100%}
 
 .referral-box{
-    max-width:680px;
-
-    margin:27px auto 0;
-
-    display:flex;
-
-    align-items:center;
-
-    gap:9px;
-
-    padding:8px;
-
-    border:1px solid var(--line);
-
-    border-radius:11px;
-
-    background:#04040a;
+  border:1px solid rgba(181,108,255,.2);
+  border-radius:20px;
+  padding:35px 24px;
+  background:rgba(255,255,255,.015);
+  text-align:center;
+}
+.referral-box h2{font:700 32px "Space Grotesk";letter-spacing:-1px}
+.referral-box p{color:var(--muted);margin:8px 0 18px;font-size:14px}
+.ref-row{display:flex;gap:10px;max-width:520px;margin:auto}
+.ref-row input{
+  flex:1;
+  color:#d8d9e5;
+  background:#06060d;
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:10px 14px;
+  outline:none;
+  font-size:12px;
 }
 
-.referral-link{
-    flex:1;
-
-    padding:9px;
-
-    color:#888899;
-
-    font-family:monospace;
-
-    font-size:10px;
-
-    text-align:left;
-
-    white-space:nowrap;
-
-    overflow:hidden;
-
-    text-overflow:ellipsis;
+.footer{
+  border-top:1px solid var(--line);
+  padding:35px 0;
+  margin-top:35px;
 }
+.footer-row{display:flex;justify-content:space-between;gap:20px}
+.footer p{color:#727486;font-size:11px;margin-top:6px}
 
-.copy-button{
-    border:none;
-
-    padding:11px 16px;
-
-    border-radius:8px;
-
-    color:white;
-
-    background:
-        linear-gradient(
-            100deg,
-            var(--purple),
-            var(--blue)
-        );
-
-    font-size:9px;
-
-    font-weight:700;
-
-    cursor:pointer;
+.dashboard-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(160px, 1fr));
+  gap:10px;
+  margin-bottom:14px;
 }
-
-/* =========================================================
-   FOOTER
-========================================================= */
-
-footer{
-    margin-top:100px;
-
-    padding:
-        45px 6%;
-
-    border-top:1px solid var(--line);
-
-    text-align:center;
-
-    color:#505063;
-
-    font-size:9px;
+.dash-card{
+  background:var(--panel2);
+  border:1px solid var(--line);
+  padding:15px 12px;
+  border-radius:12px;
+  text-align: center;
 }
+.dash-card h4{font-size:10px;color:var(--muted);margin-bottom:6px; text-transform: uppercase; letter-spacing:0.5px}
+.dash-card .val{font:700 20px "Space Grotesk";color:#fff}
+.dash-card .val.highlight{color:var(--cyan)}
+.dash-card .val.gold{color:#ffb84d}
 
-.footer-logo{
-    margin-bottom:9px;
-
-    color:white;
-
-    font-family:"Space Grotesk";
-
-    font-size:18px;
+.modal{
+  position:fixed;inset:0;z-index:500;
+  display:none;align-items:center;justify-content:center;
+  background:rgba(0,0,0,.82);
+  backdrop-filter:blur(10px);
 }
+.modal.show{display:flex}
+.modal-box{
+  width:min(540px,92%);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:22px;
+  background:#0a0a13;
+}
+.modal-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.modal h3{font:600 20px "Space Grotesk"}
+.close{font-size:22px;color:#999;cursor:pointer}
 
-/* =========================================================
-   RESPONSIVE
-========================================================= */
+.toast{
+  position:fixed;
+  left:50%;bottom:25px;
+  transform:translateX(-50%);
+  opacity:0;
+  pointer-events:none;
+  z-index:700;
+  padding:10px 16px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:#11111b;
+  color:#fff;font-size:12px;
+  transition: opacity 0.3s;
+}
+.toast.show{opacity:1}
 
 @media(max-width:900px){
-
-    .nav{
-        display:none;
-    }
-
-    .hero{
-        padding-top:100px;
-        min-height:auto;
-    }
-
-    .stats{
-        grid-template-columns:
-            repeat(2,1fr);
-    }
-
-    .wallet-grid{
-        grid-template-columns:1fr;
-    }
-
-    .plan-grid{
-        grid-template-columns:
-            repeat(2,1fr);
-    }
-
-    .feature-grid{
-        grid-template-columns:
-            repeat(2,1fr);
-    }
-
+  .navlinks{display:none}
+  .hero{padding-top:110px}
+  .ref-row{flex-direction:column}
 }
-
-@media(max-width:560px){
-
-    .navbar{
-        padding:0 5%;
-        height:70px;
-    }
-
-    .logo{
-        font-size:18px;
-    }
-
-    .wallet-button{
-        padding:10px 12px;
-        font-size:9px;
-    }
-
-    .hero{
-        padding:
-            80px 5%
-            65px;
-    }
-
-    .hero h1{
-        font-size:56px;
-        letter-spacing:-3px;
-    }
-
-    .hero-description{
-        font-size:13px;
-    }
-
-    .container{
-        padding:
-            60px 5%;
-    }
-
-    .stats{
-        grid-template-columns:
-            1fr 1fr;
-    }
-
-    .stat{
-        padding:19px;
-    }
-
-    .stat-number{
-        font-size:24px;
-    }
-
-    .plan-grid{
-        grid-template-columns:1fr;
-    }
-
-    .network-grid{
-        grid-template-columns:1fr;
-    }
-
-    .feature-grid{
-        grid-template-columns:1fr;
-    }
-
-    .about-grid{
-        grid-template-columns:1fr;
-    }
-
-    .referral{
-        padding:35px 18px;
-    }
-
-    .referral-box{
-        flex-direction:column;
-        align-items:stretch;
-    }
-
-    .referral-link{
-        text-align:center;
-    }
-
-    .copy-button{
-        width:100%;
-    }
-
-}
-
 </style>
 </head>
 
 <body>
 
-<div class="ambient one"></div>
-<div class="ambient two"></div>
-<div class="ambient three"></div>
+<header class="nav">
+  <a class="logo" href="#home">direct<i></i><span>Pulse</span></a>
 
-<div class="grid-background"></div>
+  <nav class="navlinks">
+    <a href="#about">About</a>
+    <a href="#architecture">Protocol</a>
+    <a href="#packages">Packages</a>
+    <a href="#referral">Referral</a>
+  </nav>
 
-
-<!-- =====================================================
-     NAVIGATION
-===================================================== -->
-
-<nav class="navbar">
-
-    <div class="logo">
-        DIRECT<span>PULSE</span>
-    </div>
-
-    <div class="nav">
-
-        <a href="#dashboard">Dashboard</a>
-
-        <a href="#plans">Plans</a>
-
-        <a href="#network">Network</a>
-
-        <a href="#about">About</a>
-
-    </div>
-
-    <button
-        class="wallet-button"
-        onclick="connectWallet()"
-        id="connectButton">
-
-        CONNECT WALLET
-
+  <div class="nav-right">
+    <button class="dashboard-btn-icon" onclick="openDashboard()">
+      📊 <span>Dashboard</span>
     </button>
+    <button class="btn primary" onclick="connectWallet()">Connect</button>
+  </div>
+</header>
 
-</nav>
+<main>
 
+<section class="hero" id="home">
+  <div class="container">
+    <div class="pill"><b></b> NEXT-GEN AUTOMATED DECENTRALIZED PROTOCOL</div>
+    <h1>Empowering Global Earnings via <span class="gradient">Smart Contracts</span>.</h1>
+    <p id="about">A transparent, fully automated Web3 ecosystem featuring direct reward allocations, automated tier upgrades, and persistent yield streams.</p>
+    <div class="actions">
+      <button class="btn primary" onclick="openDashboard()">Open Dashboard</button>
+      <button class="btn" onclick="connectWallet()">Connect Wallet</button>
+    </div>
+  </div>
+</section>
 
-<!-- =====================================================
-     HERO
-===================================================== -->
+<section id="architecture">
+  <div class="container">
+    <div class="section-head">
+      <h2>Earning <span class="gradient">Architecture</span></h2>
+      <p>Discover how the DirectPulse protocol distributes yield, manages network volume, and triggers automated package progressions.</p>
+    </div>
 
-<section class="hero">
+    <div class="roadmap-grid">
+      <div class="roadmap-card">
+        <h3>1. Direct Sponsor Yield</h3>
+        <p>Generates a direct <b>33%</b> reward instantly paid out to qualified sponsors for expanding ecosystem reach and supporting active team growth.</p>
+      </div>
 
-    <div class="hero-inner">
+      <div class="roadmap-card">
+        <h3>2. Community Pool Lock</h3>
+        <p>Automatically reserves <b>11%</b> into a decentralized Community Lock Pool, generating persistent incentives for top performers and long-term ecosystem partners.</p>
+      </div>
 
-        <div class="eyebrow">
+      <div class="roadmap-card">
+        <h3>3. Smart Package Thresholds</h3>
+        <p>The Smart Contract constantly tracks each user's total accrued revenue history. Once historical earnings cross specific thresholds, an automated trigger sequence is activated.</p>
+      </div>
 
-            <span class="live-dot"></span>
+      <div class="roadmap-card">
+        <h3>4. Automated Tier Progression</h3>
+        <p>Upon reaching a threshold, the Smart Contract automatically executes tier upgrades seamlessly across all levels without manual intervention.</p>
+      </div>
 
-            Web3 Infrastructure
+      <div class="roadmap-card">
+        <h3>5. Continuous Earnings Locking</h3>
+        <p>Persistent matrix limits ensure cycling rewards, continuous reinvestment triggers, and uninterrupted commission streams across every active level.</p>
+      </div>
 
+      <div class="roadmap-card">
+        <h3>6. Zero-Loss Security</h3>
+        <p>Users who keep their tier thresholds satisfied enjoy uninterrupted payout streams. Unqualified income is safely recycled through the smart contract back to active participants.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="packages">
+  <div class="container">
+    <div class="section-head">
+      <h2>Explore <span class="gradient">Packages</span></h2>
+      <p>Select your entry tier. Fully governed by verified Smart Contract logic.</p>
+    </div>
+
+    <div class="packages">
+      <!-- 1. Pulse Entry: 25 USDT -->
+      <article class="package">
+        <div>
+          <div class="pkg-badges">
+            <span class="pkg-badge">56% Membership</span>
+            <span class="pkg-badge">75% Direct</span>
+            <span class="pkg-badge">25% Community</span>
+          </div>
+          <h3>Pulse Entry</h3>
+          <div class="price">25 USDT</div>
+          <small>Smart Contract Ready</small>
+          <ul>
+            <li>Ecosystem Access</li>
+            <li>Direct Sponsor Allocation</li>
+            <li>Instant On-Chain Settlement</li>
+          </ul>
         </div>
+        <button class="btn" onclick="selectPackage('25 USDT', 25)">Activate Package</button>
+      </article>
 
+      <!-- 2. Pulse Basic: 100 USDT -->
+      <article class="package">
+        <div>
+          <div class="pkg-badges">
+            <span class="pkg-badge">56% Membership</span>
+            <span class="pkg-badge">75% Direct</span>
+            <span class="pkg-badge">25% Community</span>
+          </div>
+          <h3>Pulse Basic</h3>
+          <div class="price">100 USDT</div>
+          <small>Smart Contract Ready</small>
+          <ul>
+            <li>Enhanced Matrix Slot</li>
+            <li>Direct Sponsor Allocation</li>
+            <li>Instant On-Chain Settlement</li>
+          </ul>
+        </div>
+        <button class="btn" onclick="selectPackage('100 USDT', 100)">Activate Package</button>
+      </article>
 
-        <h1>
+      <!-- 3. Pulse Pro: 400 USDT -->
+      <article class="package">
+        <div>
+          <div class="pkg-badges">
+            <span class="pkg-badge">56% Membership</span>
+            <span class="pkg-badge">75% Direct</span>
+            <span class="pkg-badge">25% Community</span>
+          </div>
+          <h3>Pulse Pro</h3>
+          <div class="price">400 USDT</div>
+          <small>Smart Contract Ready</small>
+          <ul>
+            <li>Expanded Tier Growth</li>
+            <li>Direct Sponsor Allocation</li>
+            <li>Instant On-Chain Settlement</li>
+          </ul>
+        </div>
+        <button class="btn" onclick="selectPackage('400 USDT', 400)">Activate Package</button>
+      </article>
 
-            The new layer
-            <br>
+      <!-- 4. Pulse Master: 2,500 USDT -->
+      <article class="package featured">
+        <div>
+          <div class="pkg-badges">
+            <span class="pkg-badge">56% Membership</span>
+            <span class="pkg-badge">75% Direct</span>
+            <span class="pkg-badge">25% Community</span>
+          </div>
+          <h3>Pulse Master</h3>
+          <div class="price">2,500 USDT</div>
+          <small>Smart Contract Ready</small>
+          <ul>
+            <li>Full Matrix Privileges</li>
+            <li>Priority Yield Route</li>
+            <li>Instant On-Chain Settlement</li>
+          </ul>
+        </div>
+        <button class="btn primary" onclick="selectPackage('2,500 USDT', 2500)">Activate Package</button>
+      </article>
 
-            <span class="hero-gradient">
-                of Web3.
-            </span>
+      <!-- 5. Pulse Premier: 7,500 USDT -->
+      <article class="package">
+        <div>
+          <div class="pkg-badges">
+            <span class="pkg-badge">56% Membership</span>
+            <span class="pkg-badge">75% Direct</span>
+            <span class="pkg-badge">25% Community</span>
+          </div>
+          <h3>Pulse Premier</h3>
+          <div class="price">7,500 USDT</div>
+          <small>Smart Contract Ready</small>
+          <ul>
+            <li>Full Institutional Access</li>
+            <li>Direct Sponsor Allocation</li>
+            <li>Instant On-Chain Settlement</li>
+          </ul>
+        </div>
+        <button class="btn" onclick="selectPackage('7,500 USDT', 7500)">Activate Package</button>
+      </article>
 
-        </h1>
+      <!-- 6. Pulse Elite: 25,000 USDT -->
+      <article class="package">
+        <div>
+          <div class="pkg-badges">
+            <span class="pkg-badge">56% Membership</span>
+            <span class="pkg-badge">75% Direct</span>
+            <span class="pkg-badge">25% Community</span>
+          </div>
+          <h3>Pulse Elite</h3>
+          <div class="price">25,000 USDT</div>
+          <small>Smart Contract Ready</small>
+          <ul>
+            <li>Priority Node Slot</li>
+            <li>Direct Sponsor Allocation</li>
+            <li>Instant On-Chain Settlement</li>
+          </ul>
+        </div>
+        <button class="btn" onclick="selectPackage('25,000 USDT', 25000)">Activate Package</button>
+      </article>
+    </div>
+  </div>
+</section>
 
+<section id="referral">
+  <div class="container">
+    <div class="referral-box">
+      <h2>Invite. Connect. <span class="gradient">Earn.</span></h2>
+      <p>Share your unique referral link to unlock instant distributions directly into your web3 wallet.</p>
+      <div class="ref-row">
+        <input id="refLink" readonly value="Connect Wallet to Generate Referral Link">
+        <button class="btn primary" onclick="copyReferral()">Copy Link</button>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <p class="hero-description">
+</main>
 
-            DirectPulse is a modern Web3-focused digital platform
-            designed to bring wallet connectivity, account
-            information, platform plans, network intelligence
-            and blockchain activity into one refined digital
-            experience.
+<footer class="footer">
+  <div class="container footer-row">
+    <div>
+      <div class="logo">direct<i></i><span>Pulse</span></div>
+      <p>© 2026 DirectPulse. Verified Smart Contract Ecosystem.</p>
+    </div>
+  </div>
+</footer>
 
-        </p>
-
-
+<div class="modal" id="dashboardModal">
+  <div class="modal-box">
+    <div class="modal-top">
+      <h3>Live <span class="gradient">Dashboard</span></h3>
+      <span class="close" onclick="closeModal('dashboardModal')">×</span>
+    </div>
     
+    <div class="dashboard-grid">
+      <div class="dash-card"><h4>Total Team</h4><div class="val" id="valDirectCount">0</div></div>
+      <div class="dash-card"><h4>Total Invested</h4><div class="val" id="valTotalInvested">0.00 USDT</div></div>
+    </div>
+
+    <div class="dashboard-grid">
+      <div class="dash-card"><h4>Total Earned</h4><div class="val highlight" id="valTotalEarned">0.00 USDT</div></div>
+      <div class="dash-card"><h4>Status</h4><div class="val gold" id="valStatus">Not Active</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="walletModal">
+  <div class="modal-box">
+    <div class="modal-top">
+      <h3>Wallet Connection</h3>
+      <span class="close" onclick="closeModal('walletModal')">×</span>
+    </div>
+    <p id="walletText">Checking for a compatible Web3 wallet...</p>
+    <div id="walletAddress" style="margin:16px 0;padding:12px;background:#05050b;border:1px solid var(--line);border-radius:10px;word-break:break-all;color:#cdb7ff;font-size:12px"></div>
+    <button class="btn primary" onclick="closeModal('walletModal')">Continue</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// Smart Contract Integration
+const CONTRACT_ADDRESS = "0xDBC6a2A23C1D8BbBd9B1D5FE309876cf45D34E08";
+
+const $ = (id) => document.getElementById(id);
+
+function toast(message){
+  const el = $('toast');
+  el.textContent = message;
+  el.classList.add('show');
+  clearTimeout(window.__toast);
+  window.__toast = setTimeout(()=>el.classList.remove('show'),2200);
+}
+
+function openDashboard(){ 
+  $('dashboardModal').classList.add('show'); 
+}
+function closeModal(id){ $(id).classList.remove('show'); }
+
+async function connectWallet(){
+  $('walletModal').classList.add('show');
+  const text = $('walletText');
+  const address = $('walletAddress');
+
+  if(!window.ethereum){
+    text.textContent = 'No Web3 wallet detected. Please open in Metamask or Trust Wallet.';
+    address.textContent = '';
+    return;
+  }
+
+  try{
+    const accounts = await window.ethereum.request({ method:'eth_requestAccounts' });
+    if(accounts && accounts.length){
+      const userAddress = accounts[0];
+      text.textContent = 'Wallet connected successfully!';
+      address.textContent = userAddress;
+      window.userAccount = userAddress;
+
+      const currentDomain = window.location.origin + window.location.pathname;
+      $('refLink').value = currentDomain + "?ref=" + userAddress;
+
+      toast('Wallet Connected!');
+    }
+  }catch(err){
+    text.textContent = 'Wallet connection was cancelled.';
+    address.textContent = '';
+  }
+}
+
+async function copyReferral(){
+  const value = $('refLink').value;
+  try{
+    await navigator.clipboard.writeText(value);
+    toast('Referral link copied!');
+  }catch(e){
+    $('refLink').select();
+    document.execCommand('copy');
+    toast('Referral link copied!');
+  }
+}
+
+async function selectPackage(packageName, amount){
+  toast(packageName + ' selected.');
+  if(!window.ethereum || !window.userAccount){
+    alert("Please connect your wallet first!");
+    connectWallet();
+    return;
+  }
+  toast('Ready to interact with contract: ' + CONTRACT_ADDRESS.substring(0,6) + '...');
+}
+
+document.querySelectorAll('.modal').forEach(modal=>{
+  modal.addEventListener('click',(e)=>{
+    if(e.target === modal) modal.classList.remove('show');
+  });
+});
+
+window.addEventListener('DOMContentLoaded', () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const referrer = urlParams.get('ref');
+  if(referrer){
+    window.userReferrer = referrer;
+  }
+});
+</script>
+
+</body>
+   </html>
